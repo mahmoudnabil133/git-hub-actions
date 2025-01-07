@@ -1,10 +1,13 @@
-FROM node:latest
+FROM node:18
 
-WORKDIR /app 
+WORKDIR /myApp 
 
-COPY package.json .
+# Copy package.json and package-lock.json first to leverage Docker caching
+COPY package.json package-lock.json ./
+
 RUN npm install
 
+# Copy the rest of the app code
 COPY . .
 
 EXPOSE 3000

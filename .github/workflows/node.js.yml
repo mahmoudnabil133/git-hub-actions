@@ -44,7 +44,7 @@ jobs:
 
     - name: Add server to known hosts
       run: |
-        mkdir -p ~/.ssh
+        mkdir -p ~/.ssh 
         ssh-keyscan -H 20.21.146.3 >> ~/.ssh/known_hosts
 
     - name: Save the private key to a file

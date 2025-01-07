@@ -40,8 +40,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
-    - name: Deploy to server
-    
+    - name: Deploy to server 
       run: |
         echo "${{ secrets.SERVER_PRIVATE_KEY }}" > ssh_key.pem
         chmod 600 ssh_key.pem

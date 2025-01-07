@@ -40,7 +40,13 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    
 
+    - name: Add server to known hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -H 20.21.146.3 >> ~/.ssh/known_hosts
+    
     - name: Deploy to server
       run: |
         # Save the private key to a file

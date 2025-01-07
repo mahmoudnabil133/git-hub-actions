@@ -44,7 +44,7 @@ jobs:
       run: |
         echo "${{ secrets.SERVER_PRIVATE_KEY }}" > ssh_key.pem
         chmod 600 ssh_key.pem
-        ssh -o StrictHostKeyChecking=no -i ssh_key.pem mahmoudnabil@20.21.146.3 <<'EOF'
+        ssh -o StrictHostKeyChecking=no -i ssh_key.pem mahmoudnabil@20.21.146.3 <<EOF
           docker pull mahmoudnabil133/github_actions:latest
           docker stop my-app || true
           docker rm my-app || true

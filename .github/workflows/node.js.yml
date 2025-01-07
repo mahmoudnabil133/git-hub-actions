@@ -46,24 +46,25 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         ssh-keyscan -H 20.21.146.3 >> ~/.ssh/known_hosts
-    
-    - name: Deploy to server
+
+    - name: Save the private key to a file
       run: |
-        # Save the private key to a file
         echo "${{ secrets.SERVER_PRIVATE_KEY }}" > ssh_key.pem
         chmod 600 ssh_key.pem
-        
-        # Create the deployment script
+
+    - name: Debug SSH connection
+      run: |
+        echo "Debugging SSH..."
+        chmod 600 ssh_key.pem
+        ssh -vvv -i ssh_key.pem mahmoudnabil@20.21.146.3 'echo "Connected!"'
+
+    - name: Deploy to server
+      run: |
         echo "docker pull mahmoudnabil133/github_actions:latest" > deploy.sh
         echo "docker stop my-app || true" >> deploy.sh
         echo "docker rm my-app || true" >> deploy.sh
         echo "docker run -d --name my-app -p 80:3000 mahmoudnabil133/github_actions:latest" >> deploy.sh
-        
-        # Make the script executable
         chmod +x deploy.sh
-        
-        # Run the deployment script using SSH
-        ssh -o StrictHostKeyChecking=no -i ssh_key.pem mahmoudnabil@20.21.146.3 'bash -s' < deploy.sh
+        ssh -i ssh_key.pem mahmoudnabil@20.21.146.3 'bash -s' < deploy.sh
       env:
         SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-

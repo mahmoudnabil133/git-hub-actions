@@ -9,4 +9,12 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('actions')
+  actions(): string {
+    return 'this is github actions endpoint'
+  }
+
+
+
 }

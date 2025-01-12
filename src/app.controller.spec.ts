@@ -18,5 +18,9 @@ describe('AppController', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hellowe World!!!!');
     });
+
+    it('should return "this is github actions endpoint"', () => {
+      expect(appController.actions()).toBe('this is github actions endpoint');
+    });
   });
 });

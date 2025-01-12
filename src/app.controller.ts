@@ -14,4 +14,9 @@ export class AppController {
   getMe(): string {
     return this.appService.getMe();
   }
+
+  @Get('actions')
+  actions(): string {
+    return 'this is github actions';
+  }
 }
